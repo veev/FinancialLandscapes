@@ -50,6 +50,7 @@ class testApp : public ofBaseApp{
         void bang(ofxTLBangEventArgs& args);
     int size;
     
+
     logo logoMode;
     plotter plotterMode;
     heatmap heatmapMode;

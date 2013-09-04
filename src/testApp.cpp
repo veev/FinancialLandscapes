@@ -4,14 +4,34 @@
 void testApp::setup(){
     ofBackground(0);
     
-
+    
     logoMode = BP;
     screenX = 46;
     screenY = 7;
     screenWidth = 950;
     screenHeight = 992;
     screenXdelta, screenYdelta, screenWidthDelta, screenHeightDelta = 0;
-
+    
+    
+    
+    
+    if(ofFile::doesFileExist("screenCalibration.txt")){
+        ofBuffer calibrationBuffer = ofBufferFromFile("screenCalibration.txt");
+        string values = calibrationBuffer.getFirstLine();
+        vector<string> valuesVector = ofSplitString(values, ",");
+        screenWidth = ofToInt(valuesVector[0]);
+        screenHeight =ofToInt(valuesVector[1]);
+        screenX = ofToInt(valuesVector[2]);
+        screenY = ofToInt(valuesVector[3]);
+        ofLogNotice()<<"Calibration values loaded from file."<<endl;
+    }
+    else{
+        ofLogError()<<"CALIBRATION FILE DOES NOT EXIST!"<<endl;
+    }
+    
+    
+    
+    
     screen.allocate( screenWidth, screenHeight, GL_RGB);
     imgWidth = screen.getWidth()/2;
     imgHeight = screen.getHeight()/2;
@@ -41,7 +61,7 @@ void testApp::setup(){
     timeline.addCurves("numbersMoveX", ofRange(0, screenWidth));
     timeline.addCurves("linesMoveX", ofRange(-screenWidth, screenWidth));
     timeline.addCurves("linesMoveY", ofRange(-screenHeight*2.0, screenHeight*2.0));
-//    timeline.addCurves("linesMoveY", ofRange(-screenH))
+    //    timeline.addCurves("linesMoveY", ofRange(-screenH))
     //timeline.addCurves("linesMoveLeft", ofRange(-0.5, 0));
     timeline.addSwitches("switches");
     timeline.addFlags("flags");
@@ -57,15 +77,15 @@ void testApp::setup(){
     size = 20;
     text = "";
     
-//    drawTimeline = false;
-//    drawLogos = false;
-//    drawPlotter = false;
-//    drawNumbers = false;
-//    drawSpotLight = false;
-//    drawLinesHorizontal = false;
-//    drawLinesVertical = false;
-//    drawLinesCenterVertical = false;
-//    logoQuadrant, drawBP, drawExxon, drawShell, drawChevron = false;
+    //    drawTimeline = false;
+    //    drawLogos = false;
+    //    drawPlotter = false;
+    //    drawNumbers = false;
+    //    drawSpotLight = false;
+    //    drawLinesHorizontal = false;
+    //    drawLinesVertical = false;
+    //    drawLinesCenterVertical = false;
+    //    logoQuadrant, drawBP, drawExxon, drawShell, drawChevron = false;
     
     lineDeltaX, lineDeltaY = 0;
     
@@ -84,7 +104,7 @@ void testApp::setup(){
         }
     }
     heatMap_chevron.update();
-
+    
 }
 
 //--------------------------------------------------------------
@@ -102,7 +122,7 @@ void testApp::bang(ofxTLBangEventArgs& args){
     else if(args.flag == "singleLine")
     {
         plotterMode = SINGLE_LINE;
-
+        
     }
     else if(args.flag == "linesHoriz")
     {
@@ -156,7 +176,7 @@ void testApp::bang(ofxTLBangEventArgs& args){
         heatmapMode = H_CHEVRON;
         drawHeatmap = true;
     }
-
+    
     else if(args.flag == "spotlight")
     {
         drawLogos = false;
@@ -173,7 +193,7 @@ void testApp::bang(ofxTLBangEventArgs& args){
 
 //--------------------------------------------------------------
 void testApp::update(){
-
+    
 }
 
 //--------------------------------------------------------------
@@ -185,15 +205,15 @@ void testApp::draw(){
     float theta;
     size = timeline.getValue("scale");
     theta = timeline.getValue("theta");
-
-//    if(timeline.isSwitchOn("switches")) {
-//        //ofRect(position, size, size);
-//    } else {
-//        //ofCircle(position, size);
-//    }
+    
+    //    if(timeline.isSwitchOn("switches")) {
+    //        //ofRect(position, size, size);
+    //    } else {
+    //        //ofCircle(position, size);
+    //    }
     
     ofSetRectMode(OF_RECTMODE_CENTER);
-
+    
     bp_fbo.begin();
     ofBackground(0);
     ofPushMatrix();
@@ -242,8 +262,8 @@ void testApp::draw(){
     heatMap_chevron.draw(0, 0, size, size);
     ofPopMatrix();
     h_chevron_fbo.end();
-
-
+    
+    
     if(drawLogos) {
         
         if(logoMode == QUAD){
@@ -251,7 +271,7 @@ void testApp::draw(){
         }
         switch(logoMode){
                 
-                case BP:
+            case BP:
                 screen.begin();
                 ofBackground(0);
                 ofPushMatrix();
@@ -269,7 +289,7 @@ void testApp::draw(){
                 ofPopMatrix();
                 break;
                 
-                case CHEVRON:
+            case CHEVRON:
                 screen.begin();
                 ofBackground(0);
                 ofPushMatrix();
@@ -353,16 +373,16 @@ void testApp::draw(){
                 screen.draw(0, 0);
                 ofPopMatrix();
                 break;
-        
                 
-             default:
+                
+            default:
                 
                 break;
                 
                 
         }
         
-
+        
     }
     
     if(drawHeatmap) {
@@ -396,13 +416,13 @@ void testApp::draw(){
             previousMillis = currentMillis;
             for( int i = 0; i < screen.getWidth(); i+= 147) {
                 for( int j = 0; j < screen.getHeight(); j += 20) {
-                     if ((ofGetElapsedTimeMillis() % 1000)) {
-//                     ofDrawBitmapString("$" + ofToString((int)ofRandom(10000, 99999) + "." + ofToString((int)ofRandom(10, 99))), 0, 0);
-                    numbersFont.drawString("$" + ofToString(ofRandom(10000, 999999), 2), i , j + moveX);
-                     }
+                    if ((ofGetElapsedTimeMillis() % 1000)) {
+                        //                     ofDrawBitmapString("$" + ofToString((int)ofRandom(10000, 99999) + "." + ofToString((int)ofRandom(10, 99))), 0, 0);
+                        numbersFont.drawString("$" + ofToString(ofRandom(10000, 999999), 2), i , j + moveX);
                     }
                 }
             }
+        }
         
         screen.end();
         
@@ -412,22 +432,6 @@ void testApp::draw(){
         ofPopMatrix();
     }
     
-    if(calibration) {
-        ofSetRectMode(OF_RECTMODE_CORNER);
-        ofBackground(255, 0, 0);
-        ofSetColor(255);
-        
-       // ofRect(screenX + screenXdelta, screenY + screenYdelta, screenWidth + screenWidthDelta, screenHeight + screenHeightDelta);
-        ofRect(screenX, screenY, screenWidth, screenHeight);
-        ofSetColor(0);
-        ofDrawBitmapString("screenWidth: " + ofToString(screenWidth), 300, 300);
-        ofDrawBitmapString("screenHeight: " + ofToString(screenHeight), 300, 350);
-        ofDrawBitmapString("screenX: " + ofToString(screenX), 300, 250);
-        ofDrawBitmapString("screenY: " + ofToString(screenY), 300, 200);
-        
-//        cout << screenX
-
-    }
     
     if(drawSpotLight) {
         ofSetRectMode(OF_RECTMODE_CORNER);
@@ -455,7 +459,7 @@ void testApp::draw(){
         ofSetLineWidth(0.01);
         lineDeltaX = timeline.getValue("linesMoveX");
         lineDeltaY = timeline.getValue("linesMoveY");
-
+        
         switch (plotterMode) {
                 
             case GRID:
@@ -496,60 +500,81 @@ void testApp::draw(){
                 ofPopStyle();
                 break;
                 
-
-//            default:
-//                break;
+                
+                //            default:
+                //                break;
         }
-//        if(drawLinesVertical) {
-//            for(int i = 0; i < screenWidth; i+=20) {
-//                ofLine((i + lineDelta) % screenWidth, 0, (i + lineDelta) % screenWidth, screenHeight);
-//
-//            }
-//        }
-//        
-//        if(drawLinesHorizontal) {
-//            for(int i = 0; i < screenHeight; i+=20) {
-//                ofLine(0, (i + lineDelta) % screenHeight, screenWidth, (i + lineDelta) % screenHeight);
-//  
-//            }
-//        }
-//        
-//        if(drawLinesCenterVertical) {
-//            for(int i = screenWidth/2; i < screenWidth; i+=20) {
-//                ofLine((i + lineDelta) % screenWidth/2, 0, (i + lineDelta) % screenWidth/2, screenHeight);
-//            }
-//    
-//        }
-//        
-//        if(drawSingleLineH) {
-//            int lineWidth = timeline.getValue("lineWidth");
-//            ofPushStyle();
-//            ofSetRectMode(OF_RECTMODE_CENTER);
-//            ofSetColor(255);
-//            ofFill();
-//            ofRect(lineDelta,screen.getHeight()/2, lineWidth, screenHeight);
-//            ofPopStyle();
-//        }
+        //        if(drawLinesVertical) {
+        //            for(int i = 0; i < screenWidth; i+=20) {
+        //                ofLine((i + lineDelta) % screenWidth, 0, (i + lineDelta) % screenWidth, screenHeight);
+        //
+        //            }
+        //        }
+        //
+        //        if(drawLinesHorizontal) {
+        //            for(int i = 0; i < screenHeight; i+=20) {
+        //                ofLine(0, (i + lineDelta) % screenHeight, screenWidth, (i + lineDelta) % screenHeight);
+        //
+        //            }
+        //        }
+        //
+        //        if(drawLinesCenterVertical) {
+        //            for(int i = screenWidth/2; i < screenWidth; i+=20) {
+        //                ofLine((i + lineDelta) % screenWidth/2, 0, (i + lineDelta) % screenWidth/2, screenHeight);
+        //            }
+        //
+        //        }
+        //
+        //        if(drawSingleLineH) {
+        //            int lineWidth = timeline.getValue("lineWidth");
+        //            ofPushStyle();
+        //            ofSetRectMode(OF_RECTMODE_CENTER);
+        //            ofSetColor(255);
+        //            ofFill();
+        //            ofRect(lineDelta,screen.getHeight()/2, lineWidth, screenHeight);
+        //            ofPopStyle();
+        //        }
         screen.end();
+        
         
         ofPushMatrix();
         ofTranslate(screenX, screenY);
         screen.draw(0, 0);
         ofPopMatrix();
+        
+        
+        
     }
     
-
+    
     
     if(drawTimeline) {
         ofSetRectMode(OF_RECTMODE_CORNER);
         timeline.draw();
     }
-
+    
+    if(calibration) {
+        ofSetRectMode(OF_RECTMODE_CORNER);
+        ofBackground(255, 0, 0);
+        ofSetColor(255);
+        
+        // ofRect(screenX + screenXdelta, screenY + screenYdelta, screenWidth + screenWidthDelta, screenHeight + screenHeightDelta);
+        ofRect(screenX, screenY, screenWidth, screenHeight);
+        ofSetColor(0);
+        ofDrawBitmapString("screenWidth: " + ofToString(screenWidth), 300, 300);
+        ofDrawBitmapString("screenHeight: " + ofToString(screenHeight), 300, 350);
+        ofDrawBitmapString("screenX: " + ofToString(screenX), 300, 250);
+        ofDrawBitmapString("screenY: " + ofToString(screenY), 300, 200);
+        
+        //        cout << screenX
+        
+    }
+    
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-
+    
     if( key == 't') {
         drawTimeline = !drawTimeline;
     }
@@ -558,7 +583,7 @@ void testApp::keyPressed(int key){
         ofToggleFullscreen();
     }
     
-
+    
     if( key == 'c') {
         calibration = !calibration;
     }
@@ -566,123 +591,123 @@ void testApp::keyPressed(int key){
     if( key == 'd') {
         drawHeatmap = !drawHeatmap;
     }
-            /*
-    if( key == 'l') {
-        drawLogos = !drawLogos;
-    }
-    
-    if( key == 'q') {
-        logoQuadrant = !logoQuadrant;
-    }
-    
-    if( key == 'w') {
-        drawBP = !drawBP;
-    }
-    
-    if( key == 'e') {
-        drawExxon = !drawExxon;
-    }
-    
-    if( key == 'r') {
-        drawShell = !drawShell;
-    }
-    
-    if( key == 'a') {
-        drawChevron = !drawChevron;
-    }
-    
-    if( key == 's') {
-        drawSpotLight = !drawSpotLight;
-    }
-    
-    if( key == 'n') {
-        drawNumbers = !drawNumbers;
-    }
-    
-    if( key == 'p') {
-        drawPlotter = !drawPlotter;
-    }
-    
-    if( key == 'h') {
-        drawLinesHorizontal = !drawLinesHorizontal;
-    }
-    
-    if( key == 'v') {
-        drawLinesVertical = !drawLinesVertical;
-    }
-    
-    if( key == 'b') {
-        drawLinesCenterVertical = !drawLinesCenterVertical;
-    }
-    
-    if( key == 'j') {
-        
-    }
-    
-    if( key == 'i') {
-        drawSingleLineH = !drawSingleLineH;
-    }
-    
-    if(key == '[') {
-        linesMoveLeft = !linesMoveLeft;
-        linesMoveRight = false;
-    }
-    
-    if(key == ']') {
-        linesMoveRight = !linesMoveRight;
-        linesMoveLeft = false;
-    }
-         */
+    /*
+     if( key == 'l') {
+     drawLogos = !drawLogos;
+     }
+     
+     if( key == 'q') {
+     logoQuadrant = !logoQuadrant;
+     }
+     
+     if( key == 'w') {
+     drawBP = !drawBP;
+     }
+     
+     if( key == 'e') {
+     drawExxon = !drawExxon;
+     }
+     
+     if( key == 'r') {
+     drawShell = !drawShell;
+     }
+     
+     if( key == 'a') {
+     drawChevron = !drawChevron;
+     }
+     
+     if( key == 's') {
+     drawSpotLight = !drawSpotLight;
+     }
+     
+     if( key == 'n') {
+     drawNumbers = !drawNumbers;
+     }
+     
+     if( key == 'p') {
+     drawPlotter = !drawPlotter;
+     }
+     
+     if( key == 'h') {
+     drawLinesHorizontal = !drawLinesHorizontal;
+     }
+     
+     if( key == 'v') {
+     drawLinesVertical = !drawLinesVertical;
+     }
+     
+     if( key == 'b') {
+     drawLinesCenterVertical = !drawLinesCenterVertical;
+     }
+     
+     if( key == 'j') {
+     
+     }
+     
+     if( key == 'i') {
+     drawSingleLineH = !drawSingleLineH;
+     }
+     
+     if(key == '[') {
+     linesMoveLeft = !linesMoveLeft;
+     linesMoveRight = false;
+     }
+     
+     if(key == ']') {
+     linesMoveRight = !linesMoveRight;
+     linesMoveLeft = false;
+     }
+     */
     if( key == '1') {
-//        screenWidthDelta++;
-//        screenWidth += screenWidthDelta;
+        
         screenWidth++;
     }
     
     else if(key  == '2') {
-//        screenWidthDelta--;
-//        screenWidth -= abs(screenWidthDelta);
+        
         screenWidth--;
     }
     
     else  if(key == '3') {
-//        screenHeightDelta++;
-//        screenHeight += screenHeightDelta;
+        
         screenHeight++;
     }
     
     else if(key  == '4') {
-//        screenHeightDelta--;
-//        screenHeight -= abs(screenHeightDelta);
+        
         screenHeight--;
     }
     
-    else if(key == '5') {
-//        screenXdelta++;
-//        screenX +=  screenXdelta;
+    else if(key == OF_KEY_RIGHT) {
+        
         screenX++;
-
+        
     }
     
-    else  if(key == '6') {
-//        screenXdelta--;
-//        screenX -=  abs(screenXdelta);
+    else  if(key == OF_KEY_LEFT) {
+        
         screenX--;
     }
     
-    else if(key == '7') {
-//        screenYdelta++;
-//        screenY += screenYdelta;
+    else if(key == OF_KEY_DOWN) {
+        
         screenY++;
     }
     
-    else  if(key == '8') {
-//        screenYdelta--;
-//        screenY -= abs(screenYdelta);
+    else  if(key == OF_KEY_UP) {
+        
         screenY--;
     }
     else if(key =='y' && calibration){
-
+        
+        cout<<"New Calibration values: "<<screenWidth<<" , "<<screenHeight<<endl;
+        
+        stringstream ss;
+        
+        ss<<screenWidth<<","<<screenHeight<<","<<screenX<<","<<screenY<<endl;
+        ofBuffer buffer;
+        buffer.set(ss);
+        ofBufferToFile("screenCalibration.txt", buffer);
         
         screen.allocate(screenWidth , screenHeight,GL_RGB );
         screen.begin();
@@ -712,7 +737,7 @@ void testApp::keyPressed(int key){
         timeline.enableEvents();
         
     }
-
+    
     
     if(key =='g'){
         timeline.saveTracksToFolder("timeline/" + ofToString(ofGetTimestampString()));
@@ -726,40 +751,40 @@ void testApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void testApp::keyReleased(int key){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y ){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseDragged(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseReleased(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::windowResized(int w, int h){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::gotMessage(ofMessage msg){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo){ 
-
+    
 }
