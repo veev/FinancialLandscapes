@@ -1,0 +1,164 @@
+<positions>
+    <element name="bangs">
+        <x>0.000000000</x>
+        <y>52.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="bangs_0">
+        <x>0.000000000</x>
+        <y>910.000000000</y>
+        <width>1344.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="circleSize">
+        <x>0.000000000</x>
+        <y>655.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="circleSize_0">
+        <x>0.000000000</x>
+        <y>1486.000000000</y>
+        <width>1344.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="circleX">
+        <x>0.000000000</x>
+        <y>527.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="circleX_0">
+        <x>0.000000000</x>
+        <y>1358.000000000</y>
+        <width>1344.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="circleY">
+        <x>0.000000000</x>
+        <y>591.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="circleY_0">
+        <x>0.000000000</x>
+        <y>1422.000000000</y>
+        <width>1344.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="colors">
+        <x>0.000000000</x>
+        <y>783.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="colors_0">
+        <x>0.000000000</x>
+        <y>1614.000000000</y>
+        <width>1344.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="curves">
+        <x>0.000000000</x>
+        <y>116.000000000</y>
+        <width>1344.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="flags">
+        <x>0.000000000</x>
+        <y>463.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="flags_0">
+        <x>0.000000000</x>
+        <y>1294.000000000</y>
+        <width>1344.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="lfo">
+        <x>0.000000000</x>
+        <y>461.000000000</y>
+        <width>1920.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="lineWidth">
+        <x>0.000000000</x>
+        <y>719.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="lineWidth_0">
+        <x>0.000000000</x>
+        <y>1550.000000000</y>
+        <width>1344.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="linesMoveX">
+        <x>0.000000000</x>
+        <y>333.000000000</y>
+        <width>1280.000000000</width>
+        <height>42.000000000</height>
+    </element>
+    <element name="linesMoveX_0">
+        <x>0.000000000</x>
+        <y>1166.000000000</y>
+        <width>1344.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="linesMoveY">
+        <x>0.000000000</x>
+        <y>399.000000000</y>
+        <width>1280.000000000</width>
+        <height>48.000000000</height>
+    </element>
+    <element name="numbersMoveX">
+        <x>0.000000000</x>
+        <y>269.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="numbersMoveX_0">
+        <x>0.000000000</x>
+        <y>1102.000000000</y>
+        <width>1344.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="scale">
+        <x>0.000000000</x>
+        <y>116.000000000</y>
+        <width>1280.000000000</width>
+        <height>65.000000000</height>
+    </element>
+    <element name="scale_0">
+        <x>0.000000000</x>
+        <y>974.000000000</y>
+        <width>1344.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="switches">
+        <x>0.000000000</x>
+        <y>399.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="switches_0">
+        <x>0.000000000</x>
+        <y>1230.000000000</y>
+        <width>1344.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="theta">
+        <x>0.000000000</x>
+        <y>205.000000000</y>
+        <width>1280.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="theta_0">
+        <x>0.000000000</x>
+        <y>1038.000000000</y>
+        <width>1344.000000000</width>
+        <height>40.000000000</height>
+    </element>
+</positions>
