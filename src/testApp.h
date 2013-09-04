@@ -46,11 +46,14 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
+        void updateRandomNumbers();
+    
         ofxTimeline timeline;
         void bang(ofxTLBangEventArgs& args);
     int size;
     
-
+    vector<vector<string> > randomNumbers;
+    map<pair<int, int>, string> randomNumbersMap;
     logo logoMode;
     plotter plotterMode;
     heatmap heatmapMode;

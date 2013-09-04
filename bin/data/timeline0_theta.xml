@@ -17,4 +17,34 @@
         <time>00:02:36:057</time>
         <value>0.250000000</value>
     </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:14:40:341</time>
+        <value>0.975000024</value>
+    </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:22:45:218</time>
+        <value>1.000000000</value>
+    </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:24:06:308</time>
+        <value>0.949999988</value>
+    </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:27:41:329</time>
+        <value>0.824999988</value>
+    </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:28:07:678</time>
+        <value>0.000000000</value>
+    </key>
 </keyframes>

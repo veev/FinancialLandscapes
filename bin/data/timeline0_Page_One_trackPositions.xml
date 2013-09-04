@@ -2,7 +2,7 @@
     <element name="bangs">
         <x>0.000000000</x>
         <y>52.000000000</y>
-        <width>1280.000000000</width>
+        <width>1680.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="bangs_0">
@@ -13,8 +13,8 @@
     </element>
     <element name="circleSize">
         <x>0.000000000</x>
-        <y>655.000000000</y>
-        <width>1280.000000000</width>
+        <y>727.000000000</y>
+        <width>1680.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="circleSize_0">
@@ -25,8 +25,8 @@
     </element>
     <element name="circleX">
         <x>0.000000000</x>
-        <y>527.000000000</y>
-        <width>1280.000000000</width>
+        <y>599.000000000</y>
+        <width>1680.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="circleX_0">
@@ -37,8 +37,8 @@
     </element>
     <element name="circleY">
         <x>0.000000000</x>
-        <y>591.000000000</y>
-        <width>1280.000000000</width>
+        <y>663.000000000</y>
+        <width>1680.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="circleY_0">
@@ -49,8 +49,8 @@
     </element>
     <element name="colors">
         <x>0.000000000</x>
-        <y>783.000000000</y>
-        <width>1280.000000000</width>
+        <y>855.000000000</y>
+        <width>1680.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="colors_0">
@@ -67,8 +67,8 @@
     </element>
     <element name="flags">
         <x>0.000000000</x>
-        <y>463.000000000</y>
-        <width>1280.000000000</width>
+        <y>535.000000000</y>
+        <width>1680.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="flags_0">
@@ -85,8 +85,8 @@
     </element>
     <element name="lineWidth">
         <x>0.000000000</x>
-        <y>719.000000000</y>
-        <width>1280.000000000</width>
+        <y>791.000000000</y>
+        <width>1680.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="lineWidth_0">
@@ -98,7 +98,7 @@
     <element name="linesMoveX">
         <x>0.000000000</x>
         <y>333.000000000</y>
-        <width>1280.000000000</width>
+        <width>1680.000000000</width>
         <height>42.000000000</height>
     </element>
     <element name="linesMoveX_0">
@@ -110,13 +110,13 @@
     <element name="linesMoveY">
         <x>0.000000000</x>
         <y>399.000000000</y>
-        <width>1280.000000000</width>
+        <width>1680.000000000</width>
         <height>48.000000000</height>
     </element>
     <element name="numbersMoveX">
         <x>0.000000000</x>
         <y>269.000000000</y>
-        <width>1280.000000000</width>
+        <width>1680.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="numbersMoveX_0">
@@ -128,7 +128,7 @@
     <element name="scale">
         <x>0.000000000</x>
         <y>116.000000000</y>
-        <width>1280.000000000</width>
+        <width>1680.000000000</width>
         <height>65.000000000</height>
     </element>
     <element name="scale_0">
@@ -139,8 +139,8 @@
     </element>
     <element name="switches">
         <x>0.000000000</x>
-        <y>399.000000000</y>
-        <width>1280.000000000</width>
+        <y>471.000000000</y>
+        <width>1680.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="switches_0">
@@ -152,7 +152,7 @@
     <element name="theta">
         <x>0.000000000</x>
         <y>205.000000000</y>
-        <width>1280.000000000</width>
+        <width>1680.000000000</width>
         <height>40.000000000</height>
     </element>
     <element name="theta_0">

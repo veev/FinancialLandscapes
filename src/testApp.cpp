@@ -28,7 +28,7 @@ void testApp::setup(){
     else{
         ofLogError()<<"CALIBRATION FILE DOES NOT EXIST!"<<endl;
     }
-    
+    updateRandomNumbers();
     
     
     
@@ -266,9 +266,6 @@ void testApp::draw(){
     
     if(drawLogos) {
         
-        if(logoMode == QUAD){
-            cout<< "IM A QUAD!!!"<<endl;
-        }
         switch(logoMode){
                 
             case BP:
@@ -416,10 +413,13 @@ void testApp::draw(){
             previousMillis = currentMillis;
             for( int i = 0; i < screen.getWidth(); i+= 147) {
                 for( int j = 0; j < screen.getHeight(); j += 20) {
-                    if ((ofGetElapsedTimeMillis() % 1000)) {
+                    if ((ofGetElapsedTimeMillis() % 10000)) {
+                        updateRandomNumbers();
                         //                     ofDrawBitmapString("$" + ofToString((int)ofRandom(10000, 99999) + "." + ofToString((int)ofRandom(10, 99))), 0, 0);
-                        numbersFont.drawString("$" + ofToString(ofRandom(10000, 999999), 2), i , j + moveX);
+                        
+
                     }
+                    numbersFont.drawString(randomNumbersMap[make_pair(i, j)], i , j + moveX);
                 }
             }
         }
@@ -571,7 +571,23 @@ void testApp::draw(){
     }
     
 }
+void testApp::updateRandomNumbers(){
+    
+    randomNumbersMap.clear();
+    cout<<"Update Numbers"<<endl;
+    
+    for( int i = 0; i < screen.getWidth(); i+= 147) {
+        for( int j = 0; j < screen.getHeight(); j += 20) {
+            //
+            string test = "$" + ofToString(ofRandom(100000, 999999), 2);
+            randomNumbersMap[make_pair(i, j)]=test;
 
+        
+        }
+        
+    }
+
+}
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
     
@@ -591,11 +607,12 @@ void testApp::keyPressed(int key){
     if( key == 'd') {
         drawHeatmap = !drawHeatmap;
     }
-    /*
+
      if( key == 'l') {
-     drawLogos = !drawLogos;
+     //drawLogos = !drawLogos;
+        updateRandomNumbers();
      }
-     
+    /*
      if( key == 'q') {
      logoQuadrant = !logoQuadrant;
      }
