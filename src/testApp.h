@@ -29,6 +29,14 @@ typedef enum{
     H_QUAD,
 }heatmap;
 
+typedef enum{
+    LOGOS,
+    NUMBERS,
+    PLOTTER,
+    SPOTLIGHT,
+    HEATMAP
+}mode;
+
 class testApp : public ofBaseApp{
 
 	public:
@@ -46,17 +54,29 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
+        void generateHeatMaps();
+        void updateCalibrationValues();
         void updateRandomNumbers();
     
-        ofxTimeline timeline;
-        void bang(ofxTLBangEventArgs& args);
-    int size;
+        void drawToFbos();
+        void runLogoMode(logo mode);
+        void runPlotterMode(plotter mode);
+        void runHeatMapMode(heatmap mode);
+        void runNumbersMode();
+        void runSpotlightMode();
     
+    ofxTimeline timeline;
+        void bang(ofxTLBangEventArgs& args);
+
+    int size;
+    float theta;
     vector<vector<string> > randomNumbers;
     map<pair<int, int>, string> randomNumbersMap;
     logo logoMode;
     plotter plotterMode;
     heatmap heatmapMode;
+
+    mode currentMode;
     string text;
     bool calibration, drawTimeline, drawLogos, drawSpotLight, drawNumbers, drawPlotter;
     bool linesMoveLeft, linesMoveRight, drawLinesVertical, drawLinesHorizontal, drawLinesCenterVertical, drawSingleLineH;
