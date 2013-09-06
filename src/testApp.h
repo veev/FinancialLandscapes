@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxTimeline.h"
+//#include "ofxSyphon.h"
 
 typedef enum{
     BP = 0,
@@ -90,7 +91,11 @@ class testApp : public ofBaseApp{
     ofTexture exxon_tex;
     ofImage shell;
     ofTexture shell_tex;
+    
     ofImage heatMap_chevron;
+    ofImage heatMap_exxon;
+    ofImage heatMap_bp;
+    ofImage heatMap_shell;
     
     int imgHeight, imgWidth;
     ofFbo screen;
@@ -117,4 +122,7 @@ class testApp : public ofBaseApp{
     int lineDeltaX, lineDeltaY;
     
     ofTrueTypeFont numbersFont;
+    
+//    ofTexture screenTex;
+//    ofxSyphonServer screenSyphonServer;
 };

@@ -1107,6 +1107,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+					"\"$(SRCROOT)/../../../addons/ofxSyphon/libs/Syphon/lib/osx\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1189,6 +1190,7 @@
 					"\"$(SRCROOT)/../../../addons/ofxTimeline/libs/sndfile/lib/vs2010\"",
 					"\"$(SRCROOT)/../../../addons/ofxTimeline/libs/sndfile/lib/win_cb\"",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = Timeline_multiTestDebug;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1202,6 +1204,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+					"\"$(SRCROOT)/../../../addons/ofxSyphon/libs/Syphon/lib/osx\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -1283,6 +1286,7 @@
 					"\"$(SRCROOT)/../../../addons/ofxTimeline/libs/sndfile/lib/vs2010\"",
 					"\"$(SRCROOT)/../../../addons/ofxTimeline/libs/sndfile/lib/win_cb\"",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = Timeline_multiTest;
 				WRAPPER_EXTENSION = app;
 			};

@@ -26,14 +26,26 @@
     <key>
         <easefunc>0</easefunc>
         <easetype>0</easetype>
-        <time>00:22:45:218</time>
+        <time>00:22:45:219</time>
+        <value>1.000000000</value>
+    </key>
+    <key>
+        <easefunc>3</easefunc>
+        <easetype>2</easetype>
+        <time>00:23:34:445</time>
         <value>1.000000000</value>
     </key>
     <key>
         <easefunc>0</easefunc>
         <easetype>0</easetype>
-        <time>00:24:06:308</time>
-        <value>0.949999988</value>
+        <time>00:25:41:429</time>
+        <value>0.000000000</value>
+    </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:26:24:892</time>
+        <value>0.000000000</value>
     </key>
     <key>
         <easefunc>0</easefunc>
@@ -45,6 +57,48 @@
         <easefunc>0</easefunc>
         <easetype>0</easetype>
         <time>00:28:07:678</time>
+        <value>1.000000000</value>
+    </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:28:07:679</time>
+        <value>0.000000000</value>
+    </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:29:29:106</time>
+        <value>1.000000000</value>
+    </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:29:29:107</time>
+        <value>0.000000000</value>
+    </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:30:49:821</time>
+        <value>1.000000000</value>
+    </key>
+    <key>
+        <easefunc>1</easefunc>
+        <easetype>0</easetype>
+        <time>00:30:49:822</time>
+        <value>0.000000000</value>
+    </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:31:57:760</time>
+        <value>1.000000000</value>
+    </key>
+    <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:32:59:865</time>
         <value>0.000000000</value>
     </key>
 </keyframes>

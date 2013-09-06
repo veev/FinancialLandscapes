@@ -16,8 +16,8 @@
     </key>
     <key>
         <flag>linesVert</flag>
-        <time>00:06:29:632</time>
-        <value>0.675000012</value>
+        <time>00:05:49:533</time>
+        <value>1.000000000</value>
     </key>
     <key>
         <flag>grid</flag>
@@ -25,14 +25,14 @@
         <value>0.524999976</value>
     </key>
     <key>
-        <flag>numbers</flag>
-        <time>00:16:05:535</time>
-        <value>1.000000000</value>
+        <flag>spotlight</flag>
+        <time>00:18:48:232</time>
+        <value>0.000000000</value>
     </key>
     <key>
-        <flag>spotlight</flag>
-        <time>00:20:10:892</time>
-        <value>0.175000012</value>
+        <flag>numbers</flag>
+        <time>00:20:44:386</time>
+        <value>0.800000012</value>
     </key>
     <key>
         <flag>logos</flag>
@@ -46,27 +46,27 @@
     </key>
     <key>
         <flag>exxon</flag>
-        <time>00:23:55:874</time>
-        <value>0.725000024</value>
-    </key>
-    <key>
-        <flag>shell</flag>
-        <time>00:24:18:928</time>
-        <value>0.074999988</value>
+        <time>00:25:41:428</time>
+        <value>0.675000012</value>
     </key>
     <key>
         <flag>chevron</flag>
-        <time>00:26:59:822</time>
+        <time>00:27:20:179</time>
         <value>0.800000012</value>
     </key>
     <key>
+        <flag>shell</flag>
+        <time>00:29:16:719</time>
+        <value>0.024999976</value>
+    </key>
+    <key>
         <flag>logoQuad</flag>
-        <time>00:28:07:678</time>
-        <value>0.399999976</value>
+        <time>00:30:52:959</time>
+        <value>0.300000012</value>
     </key>
     <key>
         <flag />
-        <time>00:29:14:730</time>
-        <value>0.675000012</value>
+        <time>00:31:46:606</time>
+        <value>0.399999976</value>
     </key>
 </keyframes>

@@ -4,7 +4,11 @@
 void testApp::setup(){
     ofBackground(0);
     
+    //screenSyphonServer.setName("Screen Output");
+    ofSetFrameRate(60);
     
+    currentMode = PLOTTER;
+    plotterMode = SINGLE_LINE;
     logoMode = BP;
     screenX = 46;
     screenY = 7;
@@ -32,6 +36,7 @@ void testApp::setup(){
     
     
     screen.allocate( screenWidth, screenHeight, GL_RGB);
+    //screenTex.allocate(screenWidth, screenHeight, GL_RGB);
     imgWidth = screen.getWidth()/2;
     imgHeight = screen.getHeight()/2;
     
@@ -40,14 +45,23 @@ void testApp::setup(){
     exxon_fbo.allocate(imgWidth, imgHeight, GL_RGB);
     shell_fbo.allocate(imgWidth, imgHeight, GL_RGB);
     
+    h_chevron_fbo.allocate(imgWidth, imgHeight, GL_RGB);
+    h_shell_fbo.allocate(imgWidth, imgHeight, GL_RGB);
+    h_exxon_fbo.allocate(imgWidth, imgHeight, GL_RGB);
+    h_bp_fbo.allocate(imgWidth, imgHeight, GL_RGB);
+    
     bp.loadImage("images/BP_crop.jpg");
     chevron.loadImage("images/chevron_crop.jpg");
     exxon.loadImage("images/exxon.jpg");
     shell.loadImage("images/shell-logo.jpg");
     
     heatMap_chevron.loadImage("images/Chevron_Yahoo.csv.tif");
-    
-    h_chevron_fbo.allocate(imgWidth, imgHeight, GL_RGB);
+    heatMap_bp.loadImage("images/BP_Yahoo.csv.tif");
+    heatMap_exxon.loadImage("images/XOM_Yahoo.csv.tif");
+    heatMap_shell.loadImage("images/RDSA_Yahoo.csv.tif");
+
+    generateHeatMaps();
+
     
     //numbersFont.loadFont("Menlo.ttc", 18);
     numbersFont.loadFont("Monaco.dfont", 18);
@@ -71,7 +85,7 @@ void testApp::setup(){
     timeline.addColors("colors");
     ofAddListener(timeline.events().bangFired, this, &testApp::bang);
     timeline.setLoopType(OF_LOOP_NORMAL);
-    timeline.setDurationInSeconds(1800);
+    timeline.setDurationInSeconds(2400);
     timeline.enableEvents();
     size = 20;
     theta = 0;
@@ -214,6 +228,9 @@ void testApp::draw(){
         
     }
     
+    //screenTex = screen.getTextureReference();
+    //screenSyphonServer.publishTexture(&screenTex);
+    
 }
 
 void testApp:: runLogoMode(logo mode){
@@ -222,7 +239,7 @@ void testApp:: runLogoMode(logo mode){
             
         case BP:
             screen.begin();
-            ofBackground(0);
+            ofBackground(255);
             ofPushMatrix();
             ofSetRectMode(OF_RECTMODE_CENTER);
             ofTranslate(screen.getWidth()/2, screen.getHeight()/2);
@@ -240,7 +257,7 @@ void testApp:: runLogoMode(logo mode){
             
         case CHEVRON:
             screen.begin();
-            ofBackground(0);
+            ofBackground(255);
             ofPushMatrix();
             ofSetRectMode(OF_RECTMODE_CENTER);
             ofTranslate(screen.getWidth()/2, screen.getHeight()/2);
@@ -258,7 +275,7 @@ void testApp:: runLogoMode(logo mode){
             
         case SHELL:
             screen.begin();
-            ofBackground(0);
+            ofBackground(255);
             ofPushMatrix();
             ofSetRectMode(OF_RECTMODE_CENTER);
             ofTranslate(screen.getWidth()/2, screen.getHeight()/2);
@@ -276,7 +293,7 @@ void testApp:: runLogoMode(logo mode){
             
         case QUAD:
             screen.begin();
-            ofBackground(0);
+            ofBackground(255);
             ofSetRectMode(OF_RECTMODE_CORNER);
             ofPushMatrix();
             ofTranslate(0, 0);
@@ -307,12 +324,12 @@ void testApp:: runLogoMode(logo mode){
             
         case EXXON:
             screen.begin();
-            ofBackground(0);
+            ofBackground(255);
             ofPushMatrix();
             ofSetRectMode(OF_RECTMODE_CENTER);
             ofTranslate(screen.getWidth()/2, screen.getHeight()/2);
             ofRotate(theta);
-            exxon.draw(0, 0, size, size);
+            exxon.draw(0, 0);
             ofPopMatrix();
             screen.end();
             
@@ -339,7 +356,7 @@ void testApp::generateHeatMaps(){
     for(int i =0; i<heatMap_chevron.getWidth(); i++){
         for(int j = 0; j<heatMap_chevron.getHeight(); j++){
             
-            ofColor c= heatMap_chevron.getColor(i, j);
+            ofColor c = heatMap_chevron.getColor(i, j);
             
             float alpha = c.getBrightness();
             float f = ofMap(alpha, 0, 255, ofFloatColor::red.getHue(),ofFloatColor::green.getHue(),true)  ;
@@ -349,13 +366,58 @@ void testApp::generateHeatMaps(){
         }
     }
     heatMap_chevron.update();
+    
+    //generate heatmap BP
+    for(int i =0; i<heatMap_bp.getWidth(); i++){
+        for(int j = 0; j<heatMap_bp.getHeight(); j++){
+            
+            ofColor c = heatMap_bp.getColor(i, j);
+            
+            float alpha = c.getBrightness();
+            float f = ofMap(alpha, 0, 255, ofFloatColor::red.getHue(),ofFloatColor::green.getHue(),true)  ;
+            
+            ofFloatColor floatColor = ofFloatColor::fromHsb(f, 200, 200);
+            heatMap_bp.setColor(i, j, floatColor);
+        }
+    }
+    heatMap_bp.update();
+    
+    //generate heatmap Exxon
+    for(int i =0; i<heatMap_exxon.getWidth(); i++){
+        for(int j = 0; j<heatMap_exxon.getHeight(); j++){
+            
+            ofColor c = heatMap_exxon.getColor(i, j);
+            
+            float alpha = c.getBrightness();
+            float f = ofMap(alpha, 0, 255, ofFloatColor::red.getHue(),ofFloatColor::green.getHue(),true)  ;
+            
+            ofFloatColor floatColor = ofFloatColor::fromHsb(f, 200, 200);
+            heatMap_exxon.setColor(i, j, floatColor);
+        }
+    }
+    heatMap_exxon.update();
+    
+    //generate heatmap Shell
+    for(int i =0; i<heatMap_shell.getWidth(); i++){
+        for(int j = 0; j<heatMap_shell.getHeight(); j++){
+            
+            ofColor c = heatMap_shell.getColor(i, j);
+            
+            float alpha = c.getBrightness();
+            float f = ofMap(alpha, 0, 255, ofFloatColor::red.getHue(),ofFloatColor::green.getHue(),true)  ;
+            
+            ofFloatColor floatColor = ofFloatColor::fromHsb(f, 200, 200);
+            heatMap_shell.setColor(i, j, floatColor);
+        }
+    }
+    heatMap_shell.update();
 }
 
 void testApp::drawToFbos(){
     ofSetRectMode(OF_RECTMODE_CENTER);
     
     bp_fbo.begin();
-    ofBackground(0);
+    ofBackground(255);
     ofPushMatrix();
     ofTranslate(bp_fbo.getWidth()/2, bp_fbo.getHeight()/2);
     ofRotate(theta);
@@ -364,7 +426,7 @@ void testApp::drawToFbos(){
     bp_fbo.end();
     
     chevron_fbo.begin();
-    ofBackground(0);
+    ofBackground(255);
     ofPushMatrix();
     ofTranslate(chevron_fbo.getWidth()/2, chevron_fbo.getHeight()/2);
     ofRotate(theta);
@@ -373,7 +435,7 @@ void testApp::drawToFbos(){
     chevron_fbo.end();
     
     exxon_fbo.begin();
-    ofBackground(0);
+    ofBackground(255);
     ofPushMatrix();
     ofTranslate(exxon_fbo.getWidth()/2, exxon_fbo.getHeight()/2);
     ofRotate(theta);
@@ -382,7 +444,7 @@ void testApp::drawToFbos(){
     exxon_fbo.end();
     
     shell_fbo.begin();
-    ofBackground(0);
+    ofBackground(255);
     ofPushMatrix();
     ofTranslate(shell_fbo.getWidth()/2, shell_fbo.getHeight()/2);
     ofRotate(theta);
@@ -390,12 +452,40 @@ void testApp::drawToFbos(){
     ofPopMatrix();
     shell_fbo.end();
     
+    h_exxon_fbo.begin();
+    ofBackground(255,0,0);
+    ofPushMatrix();
+    ofTranslate(h_exxon_fbo.getWidth()/2, h_exxon_fbo.getHeight()/2);
+    ofRotate(theta);
+    heatMap_chevron.draw(0, 0, imgWidth, imgHeight);
+    ofPopMatrix();
+    h_exxon_fbo.end();
+    
+    h_shell_fbo.begin();
+    ofBackground(255,0,0);
+    ofPushMatrix();
+    ofTranslate(h_shell_fbo.getWidth()/2, h_shell_fbo.getHeight()/2);
+    ofRotate(theta);
+    heatMap_shell.draw(0, 0, imgWidth, imgHeight);
+    ofPopMatrix();
+    h_shell_fbo.end();
+    
+    h_bp_fbo.begin();
+    ofBackground(255,0,0);
+    ofPushMatrix();
+    ofTranslate(h_bp_fbo.getWidth()/2, h_bp_fbo.getHeight()/2);
+    ofRotate(theta);
+    heatMap_bp.draw(5, 0, imgWidth, imgHeight);
+    ofPopMatrix();
+    h_bp_fbo.end();
+    
     h_chevron_fbo.begin();
-    ofBackground(0);
+    ofBackground(255,0,0);
     ofPushMatrix();
     ofTranslate(h_chevron_fbo.getWidth()/2, h_chevron_fbo.getHeight()/2);
     ofRotate(theta);
-    heatMap_chevron.draw(0, 0, size, size);
+    ofRotate(180);
+    heatMap_chevron.draw(0, 0, imgWidth, imgHeight);
     ofPopMatrix();
     h_chevron_fbo.end();
     
@@ -415,7 +505,7 @@ void testApp::runPlotterMode(plotter mode){
             
         case GRID:
             for(int i = 0; i < screenWidth; i+=20) {
-                ofLine((i + lineDeltaX) % screenWidth, 0, (i + lineDeltaX) % screenWidth, screenHeight);
+                ofLine((i + lineDeltaX) % (screenWidth), 0, (i + lineDeltaX) % (screenWidth), screenHeight);
             }
             for(int i = 0; i < screenHeight; i+=20) {
                 ofLine(0, (i + lineDeltaY) % screenHeight, screenWidth, (i + lineDeltaY) % screenHeight);
@@ -464,10 +554,27 @@ void testApp::runHeatMapMode(heatmap mode){
     screen.begin();
     ofBackground(0);
     ofSetRectMode(OF_RECTMODE_CORNER);
+    
     ofPushMatrix();
     ofTranslate(0, 0);
+    h_exxon_fbo.draw(0, 0);
+    ofPopMatrix();
+    
+    ofPushMatrix();
+    ofTranslate(screen.getWidth()/2, 0);
+    h_bp_fbo.draw(0, 0);
+    ofPopMatrix();
+    
+    ofPushMatrix();
+    ofTranslate(0, screen.getHeight()/2);
+    h_shell_fbo.draw(0, 0);
+    ofPopMatrix();
+    
+    ofPushMatrix();
+    ofTranslate(screen.getWidth()/2, screen.getHeight()/2);
     h_chevron_fbo.draw(0, 0);
     ofPopMatrix();
+    
     screen.end();
     
     ofPushMatrix();
@@ -481,12 +588,13 @@ void testApp::runNumbersMode(){
     screen.begin();
     ofSetRectMode(OF_RECTMODE_CORNER);
     ofBackground(0);
-    ofSetColor(255);
+    ofPushStyle();
+    ofSetColor(0,255,0);
     int moveX = timeline.getValue("numbersMoveX");
     unsigned long long currentMillis = ofGetElapsedTimeMillis();
     if( currentMillis - previousMillis > 10) {
         previousMillis = currentMillis;
-        for( int i = 0; i < screen.getWidth(); i+= 147) {
+        for( int i = 0; i < screen.getWidth(); i+= 149) {
             for( int j = 0; j < screen.getHeight(); j += 20) {
                 if ((ofGetElapsedTimeMillis() % 10000)) {
                     
@@ -496,6 +604,7 @@ void testApp::runNumbersMode(){
                 numbersFont.drawString(randomNumbersMap[make_pair(i, j)], i , j + moveX);
             }
         }
+        ofPopStyle();
     }
     
     screen.end();
@@ -529,7 +638,7 @@ void testApp::updateRandomNumbers(){
     
     randomNumbersMap.clear();
     
-    for( int i = 0; i < screen.getWidth(); i+= 147) {
+    for( int i = 0; i < screen.getWidth(); i+= 149) {
         for( int j = 0; j < screen.getHeight(); j += 20) {
             //
             string test = "$" + ofToString(ofRandom(100000, 999999), 2);
@@ -592,11 +701,11 @@ void testApp::keyPressed(int key){
             }
             break;
             
-        case 'g':
+        case 's':
             timeline.saveTracksToFolder("timeline/" + ofToString(ofGetTimestampString()));
             break;
             
-        case'h':
+        case'l':
             timeline.loadTracksFromFolder("timeline");
             break;
             
@@ -689,6 +798,7 @@ void testApp::updateCalibrationValues(){
     ofBufferToFile("screenCalibration.txt", buffer);
     
     screen.allocate(screenWidth , screenHeight,GL_RGB );
+    
     screen.begin();
     ofClear(255);
     screen.end();
